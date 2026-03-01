@@ -430,7 +430,16 @@ function copyAttachments(items, dateStr) {
       if (!existsSync(att.savedPath)) continue;
 
       ensureDir(attachDir);
-      const destPath = join(attachDir, basename(att.savedPath));
+      // 원본 파일명으로 저장 (중복 시 숫자 접미사)
+      let destName = att.name || basename(att.savedPath);
+      let destPath = join(attachDir, destName);
+      let counter = 1;
+      while (existsSync(destPath)) {
+        const ext = destName.includes('.') ? '.' + destName.split('.').pop() : '';
+        const base = ext ? destName.slice(0, -ext.length) : destName;
+        destPath = join(attachDir, `${base}_${counter}${ext}`);
+        counter++;
+      }
       try {
         copyFileSync(att.savedPath, destPath);
         copied++;
