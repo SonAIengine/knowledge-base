@@ -45,7 +45,7 @@ export const MS365_SCOPES = env(
 
 // ─── Paths ─────────────────────────────────────────────────────
 
-export const KB_ROOT = expandHome(env('KB_ROOT', '~/knowledge-base'));
+export const KB_ROOT = expandHome(env('KB_ROOT', '~/workstream-kb'));
 export const CLAUDE_CLI_PATH = expandHome(env('CLAUDE_CLI_PATH', '/usr/local/bin/claude'));
 
 // 파생 경로

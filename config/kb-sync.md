@@ -5,14 +5,14 @@
 ## 실행 순서
 
 ### 1단계: Fetcher 실행
-- Bash로 실행: `cd ~/knowledge-base/scripts && /Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node fetcher.mjs 2>&1`
+- Bash로 실행: `cd ~/workstream-kb/scripts && /Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node fetcher.mjs 2>&1`
 - 결과 출력 (수집된 항목 수)
 - 에러 발생 시 사용자에게 알림 (exit code 2면 토큰 갱신 필요)
 
 ### 2단계: Processor 실행 여부 확인
 - inbox/ 디렉토리에 파일이 있는지 확인
 - 파일이 있으면 Processor 실행 제안
-- 사용자 동의 시: `cd ~/knowledge-base/scripts && /Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node processor.mjs 2>&1`
+- 사용자 동의 시: `cd ~/workstream-kb/scripts && /Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node processor.mjs 2>&1`
 
 ### 3단계: 결과 요약
 

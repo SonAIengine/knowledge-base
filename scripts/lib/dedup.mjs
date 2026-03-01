@@ -1,6 +1,6 @@
 /**
  * 중복 처리 방지 관리자
- * ~/knowledge-base/.state/processed-ids.json에서 처리된 ID 추적
+ * .state/processed-ids.json에서 처리된 ID 추적
  */
 
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from 'node:fs';

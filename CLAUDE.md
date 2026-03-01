@@ -10,7 +10,7 @@
 ## Directory Structure
 
 ```
-knowledge-base/
+workstream-kb/
 ├── scripts/
 │   ├── fetcher.mjs          # Layer 1 진입점
 │   ├── processor.mjs        # Layer 2 진입점
@@ -49,7 +49,7 @@ knowledge-base/
 | `DATA_START_DATE` | 데이터 수집 시작일 (이전 데이터 fetch 차단) |
 | `ARCHIVE_AFTER_MONTHS` | N개월 후 archive/ 이동 |
 | `INITIAL_FETCH_DAYS` | 첫 실행 시 며칠 전까지 fetch |
-| `KB_ROOT` | knowledge-base 루트 경로 |
+| `KB_ROOT` | workstream-kb 루트 경로 |
 
 ## Retention Policy
 

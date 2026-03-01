@@ -5,7 +5,7 @@ $ARGUMENTS 키워드로 지식 베이스를 검색합니다.
 ## 실행 순서
 
 ### 1단계: 인덱스 로드
-- `~/knowledge-base/index.json` 파일을 읽어 검색 인덱스를 로드
+- `~/workstream-kb/index.json` 파일을 읽어 검색 인덱스를 로드
 
 ### 2단계: 검색 실행
 - 키워드: `$ARGUMENTS`

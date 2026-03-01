@@ -7,16 +7,16 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node</string>
-        <string>/Users/sonseongjun/knowledge-base/scripts/fetcher.mjs</string>
+        <string>/Users/sonseongjun/workstream-kb/scripts/fetcher.mjs</string>
     </array>
     <key>StartInterval</key>
     <integer>1800</integer>
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/Users/sonseongjun/knowledge-base/logs/fetcher-stdout.log</string>
+    <string>/Users/sonseongjun/workstream-kb/logs/fetcher-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/sonseongjun/knowledge-base/logs/fetcher-stderr.log</string>
+    <string>/Users/sonseongjun/workstream-kb/logs/fetcher-stderr.log</string>
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>

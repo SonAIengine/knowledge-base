@@ -1,6 +1,6 @@
 /**
  * Sync State 관리
- * ~/knowledge-base/.state/sync-state.json에서 동기화 상태 추적
+ * .state/sync-state.json에서 동기화 상태 추적
  */
 
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from 'node:fs';

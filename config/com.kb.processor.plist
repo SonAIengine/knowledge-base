@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node</string>
-        <string>/Users/sonseongjun/knowledge-base/scripts/processor.mjs</string>
+        <string>/Users/sonseongjun/workstream-kb/scripts/processor.mjs</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -17,9 +17,9 @@
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/sonseongjun/knowledge-base/logs/processor-stdout.log</string>
+    <string>/Users/sonseongjun/workstream-kb/logs/processor-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/sonseongjun/knowledge-base/logs/processor-stderr.log</string>
+    <string>/Users/sonseongjun/workstream-kb/logs/processor-stderr.log</string>
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>

@@ -26,7 +26,7 @@ MS Graph API          Fetcher (Layer 1)         Processor (Layer 2)         Know
 ## Project Structure
 
 ```
-knowledge-base/
+workstream-kb/
 ├── .env.example                # Configuration template
 ├── .gitignore
 ├── README.md
@@ -184,7 +184,7 @@ The `.env` file controls all settings. Copy `.env.example` and edit:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `KB_ROOT` | Knowledge base root directory | `~/knowledge-base` |
+| `KB_ROOT` | WorkStream KB root directory | `~/workstream-kb` |
 | `CLAUDE_CLI_PATH` | Absolute path to Claude Code CLI binary | `/usr/local/bin/claude` |
 
 ### Fetcher Settings
@@ -310,10 +310,10 @@ Replace the macOS launchd plist files with cron jobs:
 crontab -e
 
 # Fetcher: every 30 minutes
-*/30 * * * * /path/to/node /path/to/knowledge-base/scripts/fetcher.mjs >> /path/to/knowledge-base/logs/fetcher-cron.log 2>&1
+*/30 * * * * /path/to/node /path/to/workstream-kb/scripts/fetcher.mjs >> /path/to/workstream-kb/logs/fetcher-cron.log 2>&1
 
 # Processor: daily at 07:00
-0 7 * * * /path/to/node /path/to/knowledge-base/scripts/processor.mjs >> /path/to/knowledge-base/logs/processor-cron.log 2>&1
+0 7 * * * /path/to/node /path/to/workstream-kb/scripts/processor.mjs >> /path/to/workstream-kb/logs/processor-cron.log 2>&1
 ```
 
 ## Troubleshooting

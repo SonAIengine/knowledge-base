@@ -5,14 +5,14 @@
 ## 실행 순서
 
 ### 1단계: 상태 파일 로드
-- `~/knowledge-base/.state/sync-state.json` 읽기
-- `~/knowledge-base/index.json` 읽기
+- `~/workstream-kb/.state/sync-state.json` 읽기
+- `~/workstream-kb/index.json` 읽기
 
 ### 2단계: 디렉토리 통계 수집
 Bash로 각 디렉토리의 파일 수 확인:
-- `find ~/knowledge-base/inbox/mail -name "*.json" 2>/dev/null | wc -l`
-- `find ~/knowledge-base/inbox/teams-chat -name "*.json" 2>/dev/null | wc -l`
-- `find ~/knowledge-base/inbox/teams-channel -name "*.json" 2>/dev/null | wc -l`
+- `find ~/workstream-kb/inbox/mail -name "*.json" 2>/dev/null | wc -l`
+- `find ~/workstream-kb/inbox/teams-chat -name "*.json" 2>/dev/null | wc -l`
+- `find ~/workstream-kb/inbox/teams-channel -name "*.json" 2>/dev/null | wc -l`
 - 각 프로젝트 디렉토리의 .md 파일 수
 
 ### 3단계: 결과 출력
