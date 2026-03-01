@@ -17,11 +17,6 @@ Auto-collect **Emails** & **Microsoft Teams** messages → AI-generated **daily 
 
 </div>
 
-<img width="1670" height="1008" alt="image" src="https://github.com/user-attachments/assets/066de137-0dfe-4dcf-adea-f1932672ad37" />
-<img width="1678" height="1021" alt="image" src="https://github.com/user-attachments/assets/906799fd-df09-4c75-a15e-c163c77df551" />
-<img width="1666" height="1018" alt="image" src="https://github.com/user-attachments/assets/c34f9c21-bf8a-4eb8-a278-761c7947e841" />
-
-Automatically collects work communications (Email, Teams Chat, Teams Channel) and generates a single comprehensive daily report using AI — building a searchable personal knowledge base.
 ---
 
 ## The Problem
@@ -32,25 +27,19 @@ If you work across multiple projects and receive dozens of emails and Teams mess
 
 WorkStream KB turns your daily communication stream into a structured, searchable knowledge base — automatically. One report per day captures everything: decisions, action items, project status, technical details, and schedules.
 
-### Sample Report Output
+### What the Report Looks Like
 
-```markdown
-## Key Summary
-- **Jeju Bank GenAI Platform** kickoff — daily requirements meetings starting Monday 10AM,
-  but client requests aggressive timeline shift (April soft-launch / July go-live)
+**Decisions, action items, and key quotes — all in one place:**
 
-## Today's Decisions
-- **[XGEN Docs]** Switched list query from qdrant → PostgreSQL — 3s → 0.1s improvement
+<img width="1670" alt="Daily report: key summary, today's decisions, and action items with context" src="https://github.com/user-attachments/assets/066de137-0dfe-4dcf-adea-f1932672ad37" />
 
-## Action Items
-| Task | Context | Requester | Due |
-|------|---------|-----------|-----|
-| Write exec meeting slides | Quarterly review | PM Lee | Tue AM |
+**Per-project status with progress, attachments, and linked documents:**
 
-## Project Status: Jeju Bank
-> "The client wants to move the timeline significantly forward..." — PM Kim
-...
-```
+<img width="1678" alt="Project status breakdown with technical details and downloadable attachments" src="https://github.com/user-attachments/assets/906799fd-df09-4c75-a15e-c163c77df551" />
+
+**Technical notes, personal/team schedule, and daily stats:**
+
+<img width="1666" alt="Technical memos, schedule split by personal and team, and message statistics" src="https://github.com/user-attachments/assets/c34f9c21-bf8a-4eb8-a278-761c7947e841" />
 
 ## Architecture
 
