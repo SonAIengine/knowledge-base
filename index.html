@@ -6,9 +6,6 @@
   <title>WorkStream KB</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    :root {
-      --docsify-example-panels-left-panel-width: 60%;
-    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
@@ -23,68 +20,32 @@
       display: table;
       width: 100%;
     }
-    /* front-matter 블록 숨김 (fallback) */
-    .markdown-section .front-matter {
-      display: none;
+    /* search 인덱싱 중 Loading 텍스트 숨김 */
+    .sidebar .search .clear-button + p,
+    .sidebar .search .results-panel .loading {
+      display: none !important;
     }
     /* 다크 모드 */
     @media (prefers-color-scheme: dark) {
-      :root {
-        --docsify-example-panels-left-panel-width: 60%;
-      }
-      body {
-        background: #1e1e1e;
-        color: #d4d4d4;
-      }
-      .sidebar {
-        background: #252526;
-        color: #d4d4d4;
-      }
-      .sidebar-nav a {
-        color: #d4d4d4 !important;
-      }
-      .sidebar-nav a:hover,
-      .sidebar-nav a.active {
-        color: #42b983 !important;
-      }
-      .markdown-section {
-        color: #d4d4d4;
-      }
-      .markdown-section code {
-        background: #2d2d2d;
-        color: #ce9178;
-      }
-      .markdown-section pre {
-        background: #1e1e1e !important;
-      }
-      .markdown-section table tr:nth-child(2n) {
-        background: #2d2d2d;
-      }
-      .markdown-section blockquote {
-        border-left-color: #42b983;
-        color: #aaa;
-      }
-      .search .input-wrap {
-        background: #2d2d2d;
-      }
-      .search input {
-        background: #2d2d2d;
-        color: #d4d4d4;
-      }
-      .search .results-panel {
-        background: #252526;
-      }
-      .search .matching-post {
-        border-bottom-color: #333;
-      }
-      .app-nav {
-        background: #1e1e1e;
-      }
+      body { background: #1e1e1e; color: #d4d4d4; }
+      .sidebar { background: #252526; color: #d4d4d4; }
+      .sidebar-nav a { color: #d4d4d4 !important; }
+      .sidebar-nav a:hover, .sidebar-nav a.active { color: #42b983 !important; }
+      .markdown-section { color: #d4d4d4; }
+      .markdown-section code { background: #2d2d2d; color: #ce9178; }
+      .markdown-section pre { background: #1e1e1e !important; }
+      .markdown-section table tr:nth-child(2n) { background: #2d2d2d; }
+      .markdown-section blockquote { border-left-color: #42b983; color: #aaa; }
+      .search .input-wrap { background: #2d2d2d; }
+      .search input { background: #2d2d2d; color: #d4d4d4; }
+      .search .results-panel { background: #252526; }
+      .search .matching-post { border-bottom-color: #333; }
+      .app-nav { background: #1e1e1e; }
     }
   </style>
 </head>
 <body>
-  <div id="app">Loading...</div>
+  <div id="app"></div>
   <script>
     window.$docsify = {
       name: 'WorkStream KB',
@@ -94,33 +55,18 @@
       homepage: 'homepage.md',
       search: {
         maxAge: 86400000,
-        paths: function() {
-          // daily/ 디렉토리의 파일만 인덱싱
-          var links = document.querySelectorAll('.sidebar-nav a[href]');
-          var paths = ['/'];
-          links.forEach(function(a) {
-            var href = a.getAttribute('href');
-            if (href && href !== '/') paths.push(href);
-          });
-          return paths;
-        },
+        paths: 'auto',
         placeholder: '검색어를 입력하세요',
         noData: '결과 없음',
-        depth: 6,
+        depth: 3,
         hideOtherSidebarContent: false,
         namespace: 'workstream-kb-v3',
       },
       auto2top: true,
-      frontMatter: {
-        installed: true,
-        keyValueRegex: /^([\w][\w-]*):\s*(.*)/,
-      },
     };
   </script>
-  <!-- Docsify core -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <!-- Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-front-matter@latest/dist/docsify-front-matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/front-matter.min.js"></script>
 </body>
 </html>
