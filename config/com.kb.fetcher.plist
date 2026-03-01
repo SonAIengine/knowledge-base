@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.kb.fetcher</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/sonseongjun/.nvm/versions/node/v20.18.1/bin/node</string>
+        <string>/Users/sonseongjun/knowledge-base/scripts/fetcher.mjs</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>1800</integer>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/sonseongjun/knowledge-base/logs/fetcher-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/sonseongjun/knowledge-base/logs/fetcher-stderr.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/sonseongjun/.nvm/versions/node/v20.18.1/bin:/Users/sonseongjun/.local/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>/Users/sonseongjun</string>
+    </dict>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>LowPriorityIO</key>
+    <true/>
+</dict>
+</plist>
