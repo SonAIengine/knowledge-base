@@ -21,3 +21,4 @@ _sidebar.md
 # Temp files
 *.tmp
 *.tmp.*
+.DS_Store

@@ -1,0 +1,9 @@
+services:
+  viewer:
+    build: .
+    container_name: workstream-kb
+    ports:
+      - "3939:3000"
+    volumes:
+      - .:/kb:ro
+    restart: unless-stopped
