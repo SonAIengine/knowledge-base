@@ -42,7 +42,8 @@ function buildDailySection() {
     const relPath = relative(KB_ROOT, filePath);
     const dateStr = basename(file.name, '.md');
     const title = extractTitle(filePath);
-    const label = title !== dateStr ? `${dateStr} - ${title}` : dateStr;
+    // 제목에 이미 날짜가 포함되어 있으면 제목만 사용
+    const label = title.includes(dateStr) ? title : (title !== dateStr ? `${dateStr} - ${title}` : dateStr);
     lines.push(`  - [${label}](${relPath})`);
   }
 

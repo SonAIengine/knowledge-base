@@ -83,15 +83,35 @@ function readJsonSafe(filePath, defaultValue) {
 }
 
 function extractMarkdownFromResponse(text) {
+  let content = text;
   try {
     const parsed = JSON.parse(text);
     if (parsed.result && typeof parsed.result === 'string') {
-      return parsed.result;
+      content = parsed.result;
     }
   } catch {
     // JSON이 아니면 그대로 markdown
   }
-  return text;
+  return content;
+}
+
+/**
+ * 리포트 응답이 유효한 마크다운인지 검증
+ * - front-matter(---) 포함 여부
+ * - 최소 길이 (2000자 이상)
+ * - "# 업무 일일 리포트" 헤딩 포함 여부
+ */
+function validateReport(content) {
+  if (!content || content.length < 2000) {
+    return { valid: false, reason: `응답이 너무 짧음 (${content?.length || 0}자, 최소 2000자)` };
+  }
+  if (!content.includes('---')) {
+    return { valid: false, reason: 'front-matter(---) 없음' };
+  }
+  if (!content.includes('# 업무 일일 리포트')) {
+    return { valid: false, reason: '"# 업무 일일 리포트" 헤딩 없음' };
+  }
+  return { valid: true };
 }
 
 function getClaudeEnv() {
@@ -342,37 +362,56 @@ function generateDailyReport(rooms) {
 
   log('info', `일일 리포트 생성 중... (${reportInput.rooms.length}개 방, ${totalMessages}건 메시지)`);
 
-  try {
-    const result = execFileSync(
-      CLAUDE_CLI,
-      [
-        '-p',
-        fullPrompt,
-        '--output-format',
-        'json',
-        '--no-session-persistence',
-        '--dangerously-skip-permissions',
-      ],
-      {
-        timeout: CLAUDE_TIMEOUT_MS,
-        maxBuffer: 10 * 1024 * 1024,
-        encoding: 'utf-8',
-        env: getClaudeEnv(),
+  const MAX_RETRIES = 2;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const result = execFileSync(
+        CLAUDE_CLI,
+        [
+          '-p',
+          fullPrompt,
+          '--output-format',
+          'json',
+          '--no-session-persistence',
+          '--dangerously-skip-permissions',
+        ],
+        {
+          timeout: CLAUDE_TIMEOUT_MS,
+          maxBuffer: 10 * 1024 * 1024,
+          encoding: 'utf-8',
+          env: getClaudeEnv(),
+        }
+      );
+
+      const reportContent = extractMarkdownFromResponse(result);
+      const validation = validateReport(reportContent);
+
+      if (!validation.valid) {
+        log('warn', `리포트 검증 실패 (시도 ${attempt}/${MAX_RETRIES}): ${validation.reason}`);
+        // 디버그용 raw 응답 저장
+        const debugPath = join(LOGS_DIR, `${today}-raw-attempt${attempt}.txt`);
+        try { writeFileSync(debugPath, result, 'utf-8'); } catch {}
+        if (attempt < MAX_RETRIES) {
+          log('info', '재시도합니다...');
+          continue;
+        }
+        log('error', `${MAX_RETRIES}회 시도 모두 검증 실패 — 마지막 응답을 저장합니다`);
       }
-    );
 
-    const reportContent = extractMarkdownFromResponse(result);
+      ensureDir(DAILY_DIR);
+      const reportPath = join(DAILY_DIR, `${today}.md`);
+      writeFileAtomic(reportPath, reportContent);
+      log('info', `일일 리포트 저장: daily/${today}.md (${reportContent.length}자, 시도 ${attempt})`);
 
-    ensureDir(DAILY_DIR);
-    const reportPath = join(DAILY_DIR, `${today}.md`);
-    writeFileAtomic(reportPath, reportContent);
-    log('info', `일일 리포트 저장: daily/${today}.md`);
-
-    return { date: today, path: `daily/${today}.md`, totalMessages };
-  } catch (err) {
-    log('error', `Claude CLI 호출 실패: ${err.message}`);
-    return null;
+      return { date: today, path: `daily/${today}.md`, totalMessages };
+    } catch (err) {
+      log('error', `Claude CLI 호출 실패 (시도 ${attempt}/${MAX_RETRIES}): ${err.message}`);
+      if (attempt >= MAX_RETRIES) return null;
+    }
   }
+
+  return null;
 }
 
 /**
@@ -563,14 +602,27 @@ async function main() {
     log('warn', '리포트 생성 실패 — inbox 파일을 보존합니다');
   }
 
-  // 7. sync-state.json 업데이트
+  // 8. sync-state.json 업데이트
   try {
     updateSyncState(items.length);
   } catch (err) {
     log('error', `sync-state 업데이트 실패: ${err.message}`);
   }
 
-  // 8. 최종 요약
+  // 9. _sidebar.md 재생성
+  if (reportResult) {
+    try {
+      execFileSync(process.execPath, [join(dirname(new URL(import.meta.url).pathname), 'generate-sidebar.mjs')], {
+        timeout: 10000,
+        encoding: 'utf-8',
+      });
+      log('info', '_sidebar.md 재생성 완료');
+    } catch (err) {
+      log('warn', `_sidebar.md 재생성 실패: ${err.message}`);
+    }
+  }
+
+  // 10. 최종 요약
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
   log(
     'info',
